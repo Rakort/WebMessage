@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsAspireHost>true</IsAspireHost>
+    <UserSecretsId>d492a76a-5068-4ee7-a63d-0090fd3bf217</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="8.0.0-preview.6.24214.1" />
+    <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="8.0.0-preview.7.24251.11" />
+    <PackageReference Include="Aspire.Npgsql" Version="8.0.0-preview.7.24251.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WebMessage.Api\WebMessage.Api.csproj" />
+    <ProjectReference Include="..\WebMessage.Observer\WebMessage.Observer.csproj" />
+    <ProjectReference Include="..\WebMessage.Reader\WebMessage.Reader.csproj" />
+    <ProjectReference Include="..\WebMessage.Writer\WebMessage.Writer.csproj" />
+  </ItemGroup>
+
+</Project>

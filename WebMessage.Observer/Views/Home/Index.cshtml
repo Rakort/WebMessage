@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Chat";
+}
+
+<h2>Real-time Chat</h2>
+
+<div id="messageList"></div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+    <script>
+        var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7172/messagehub").build();
+
+        async function start() {
+            try {
+                await connection.start();
+                console.log("SignalR Connected.");
+            } catch (err) {
+                console.log(err);
+                setTimeout(start, 5000);
+            }
+        };
+
+        connection.onclose(async () => {
+            await start();
+        });
+
+        connection.on("message", function (message) {
+            
+            var formattedMessage = message.date + ' - #' + message.number + ': ' + message.text;
+            console.log("formattedMessage");
+            var messageItem = document.createElement("div");
+            messageItem.textContent = formattedMessage;
+            document.getElementById("messageList").appendChild(messageItem);
+        });
+
+
+        // Start the connection.
+        start();
+    </script>
+}

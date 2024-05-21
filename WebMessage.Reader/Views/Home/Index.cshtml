@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Messages";
+}
+
+<h2>Messages</h2>
+
+<button id="getMessageButton">Get Messages</button>
+
+<div id="messageList"></div>
+
+@section Scripts
+{
+    <script>
+        document.getElementById("getMessageButton").addEventListener("click", function () {
+            fetch("https://localhost:7172/message")
+                .then(response => response.json())
+                .then(data => {
+                    var messageList = document.getElementById("messageList");
+                    messageList.innerHTML = "";
+                    for (var i = 0; i < data.length; i++) {
+                        var message = data[i];
+                        var formattedMessage = message.date + ' - #' + message.number + ': ' + message.text;
+                        var messageItem = document.createElement("div");
+                        messageItem.textContent = formattedMessage;
+                        messageList.appendChild(messageItem);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+}
